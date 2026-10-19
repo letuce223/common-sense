@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>common sense</title>
+    <style>
+        @font-face {
+            font-family: script;
+            src: url("KUNSTLER.TTF") format("truetype");
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: body;
+            src: url("GARA.TTF") format("truetype");
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            background-color: silver;
+        }
+
+        textarea {
+            width: 250px;
+            top: 350px;
+            resize: none;
+            border: none;
+            outline: none;
+            font-family: body;
+            font-size: 14px;
+        }
+#sage {
+    display: none;
+    position: absolute;
+    top: 350px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 250px;
+    text-align: center;
+    color: orangered;
+    font-family: body;
+    font-size: 14px;
+    font-weight: bold;
+}
+        #answer {
+            position: absolute;
+            top: 355px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 250px;
+            text-align: left;
+            color: orangered;
+            font-family: body;
+            font-size: 16px;
+        }
+
+        #answer::first-letter {
+            text-transform: uppercase;
+            font-family: script;
+            font-size: 40px;
+        }
+
+        .body-text {
+            position: absolute;
+            font-family: body;
+            font-size: 14px;
+            color: orangered;
+            width: 250px;
+            transform: translateX(-50%);
+        }
+
+        .rectangle {
+            width: 300px;
+            height: 450px;
+            background-color: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .header {
+            position: absolute;
+            top: 100px;
+            left: 50%;
+            width: 250px;
+            transform: translateX(-50%);
+            z-index: 1;
+            font-size: 72px;
+            font-family: script;
+            color: orangered;
+            line-height: 0.6;
+        }
+
+        button {
+            position: absolute;
+            top: 450px;
+            left: 49%;
+            transform: translateX(-50%);
+            font-family: script;
+            font-size: 36px;
+            color: orangered;
+            resize: none;
+            border: none;
+            outline: none;
+            background: none;
+        }
+
+        button:hover {
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .advice {
+            position: absolute;
+            top: 350px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 250px;
+            height: 100px;
+            font-family: body;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="rectangle"></div>
+    <div class="body-text" style="text-align: center; top: 100px; left: 50%; transform: translateX(-50%);">HAVE SOME
+    </div>
+    <div class="header" style="text-align: left; left: 48%;">Common</div>
+    <div class="header" style="text-align: right; top: 130px;">Sense</div>
+    <div class="body-text" style="top: 200px; left: 50%; transform: translateX(-50%);">Share a piece of "common sense"
+        advice that you would've liked to know earlier. This can be about life at ArtEZ, living abroad, work,
+        relationships or simply a lifehack you enjoy using.
+        <br> <br> Send it anonymously and get another piece of advice back written by another student.
+    </div>
+    <div class="advice">
+        <textarea id="advice" placeholder="Enter your advice here..."></textarea>
+    </div>
+    <div class="button">
+        <button onclick="sendAdvice()">Send</button>
+    </div>
+    <p id="answer"></p>
+    <p id="sage">SOME SAGE ADVICE</p>
+    <script>
+        function sendAdvice() {
+            fetch("https://script.google.com/macros/s/AKfycbxkDasYBOBNrBtYUR3NyS2k6c6UcTXHRRzub6vnRLK1yX6mySUN6p6zzzunpCuC2csp3w/exec?advice=" + advice.value)
+                .then(r => r.text())
+                .then(t => {
+                    answer.innerHTML = t;
+                    document.querySelector(".advice").style.display = "none";
+                    document.querySelector(".button").style.display = "none";
+                    document.querySelector("#sage").style.display = "block";
+                });
+        }
+    </script>
+</body>
+
+</html>
